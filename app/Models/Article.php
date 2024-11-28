@@ -43,6 +43,8 @@ class Article extends Model
 		'content',
 		'draft'
 	];
+	
+	
 
 	public function user()
 	{
