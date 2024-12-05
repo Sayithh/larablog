@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\ProfileController;
+use App\Http\Requests\ProfileUpdateRequest;
 Use App\Models\Article;
 
 Route::get('/', function () {
@@ -25,8 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/articles/store', [UserController::class, 'store'])->name('articles.store');
     Route::get('/articles/{article}/edit', [UserController::class, 'edit'])->name('articles.edit');
     Route::post('/articles/{article}/update', [UserController::class, 'update'])->name('articles.update');
+    Route::get('/articles/{article}', [ProfileController::class, 'remove'])->name('articles.remove');
 });
-
 
 
 require __DIR__.'/auth.php';

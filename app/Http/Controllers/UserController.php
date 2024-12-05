@@ -42,7 +42,7 @@ class UserController extends Controller
         // $article->categories()->sync($request->input('categories'));
 
         // On redirige l'utilisateur vers la liste des articles
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with('success', 'Article créer!');
     }
 
     public function index()
@@ -60,7 +60,7 @@ class UserController extends Controller
     {
         // On vérifie que l'utilisateur est bien le créateur de l'article
         if ($article->user_id !== Auth::user()->id) {
-            abort(403);
+            return redirect()->route('dashboard')->with('error', 'Vous ne pouvez pas modifier cet article!');
         }
 
         // On retourne la vue avec l'article
@@ -87,5 +87,17 @@ class UserController extends Controller
 
         // On redirige l'utilisateur vers la liste des articles (avec un flash)
         return redirect()->route('dashboard')->with('success', 'Article mis à jour !');
+    }
+
+    public function remove(Request $request, Article $article)
+    {
+        // On vérifie que l'utilisateur est bien le créateur de l'article
+        if ($article->user_id !== Auth::user()->id) {
+            abort(403);
+        }
+       
+        $article->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Article a bien été supprimé !');
     }
 }

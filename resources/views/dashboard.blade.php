@@ -10,6 +10,11 @@
         {{ session('success') }}
     </div>
     @endif
+    @if (session('error'))
+    <div class="bg-red-500 text-white p-4 rounded-lg mt-6 mb-6 text-center">
+        {{ session('error') }}
+    </div>
+    @endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -27,6 +32,7 @@
                     </div>
                     <div class="text-right">
                         <a href="{{ route('articles.edit', $article->id) }}" class="text-red-500 hover:text-red-700">Modifier</a>
+                        <a href="{{ route('articles.remove', $article->id) }}" class="text-red-500 hover:text-red-700">Supprimer</a>
                     </div>
                 </div>
             @endforeach
